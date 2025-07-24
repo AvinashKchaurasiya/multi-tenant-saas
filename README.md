@@ -18,7 +18,7 @@ This is a full-stack web application built with **Laravel (API Backend)** and **
 
 ## 🛠️ Technologies Used
 
-- **Laravel 11** (Backend API)
+- **Laravel 12** (Backend API)
 - **Sanctum** for authentication
 - **MySQL** database
 - **Vue 3** with Vue Router
@@ -35,9 +35,9 @@ Follow these steps after cloning the repository to set up the project on a new s
 
 ### ✅ Prerequisites
 
-- PHP >= 8.1
+- PHP >= 8.2
 - Composer
-- Node.js and npm
+- Vue
 - MySQL
 - Git
 
@@ -48,3 +48,16 @@ Follow these steps after cloning the repository to set up the project on a new s
 ```bash
 git clone https://github.com/your-username/your-project.git
 cd your-project
+
+cd multi-tenant-api
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan serve
+
+
+cd ../multi-tenant-frontend
+npm install
+npm run dev
+```
