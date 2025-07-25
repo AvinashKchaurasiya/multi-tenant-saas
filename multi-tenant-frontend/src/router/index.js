@@ -28,6 +28,12 @@ const routes = [
     component: CreateCompany,
     meta: { requiresAuth: true },
   },
+  {
+    path: "/companies/:id/edit",
+    name: "EditCompany",
+    component: CreateCompany,
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = createRouter({

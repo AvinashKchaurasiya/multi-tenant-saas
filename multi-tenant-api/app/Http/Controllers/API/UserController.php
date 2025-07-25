@@ -14,12 +14,23 @@ class UserController extends Controller
             abort(403);
         }
 
-        $request->user()->update([
+        $updated = $request->user()->update([
             'active_company_id' => $company->id,
         ]);
 
-        return response()->json(['message' => 'Active company switched']);
+        if ($updated) {
+            return response()->json([
+                'message' => 'Active company switched',
+                'company_id' => $company->id,
+                'company_name' => $company->name,
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Failed to switch active company.',
+            ], 500);
+        }
     }
+
 
     public function me(Request $request)
     {

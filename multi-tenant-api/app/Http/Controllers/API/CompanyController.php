@@ -11,7 +11,10 @@ class CompanyController extends Controller
     public function index(Request $request)
     {
         $companies = $request->user()->companies()->paginate(10);
-        return response()->json($companies);
+        return response()->json([
+            'companies' => $companies,
+            'active_company_id' => $request->user()->active_company_id,
+        ]);
     }
 
     public function store(Request $request)
@@ -23,6 +26,15 @@ class CompanyController extends Controller
         ]);
 
         $company = $request->user()->companies()->create($validated);
+
+        return response()->json($company);
+    }
+
+    public function show(Request $request, Company $company)
+    {
+        if ($company->user_id !== $request->user()->id) {
+            abort(403);
+        }
 
         return response()->json($company);
     }
@@ -53,5 +65,16 @@ class CompanyController extends Controller
         $company->delete();
 
         return response()->json(['message' => 'Company deleted']);
+    }
+
+
+    public function summary(Request $request)
+    {
+        $user = $request->user();
+
+        return response()->json([
+            'active_company_name' => optional($user->activeCompany)->name,
+            'total_companies' => $user->companies()->count(),
+        ]);
     }
 }
