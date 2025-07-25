@@ -5,6 +5,7 @@ import Register from "../views/Register.vue";
 import Dashboard from "../views/Dashboard.vue";
 import Company from "../views/Company.vue";
 import CreateCompany from "../views/CreateCompany.vue";
+import CreateProject from "@/views/CreateProject.vue";
 
 const routes = [
   { path: "/", redirect: "/login" },
@@ -33,6 +34,15 @@ const routes = [
     name: "EditCompany",
     component: CreateCompany,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/project/create",
+    component: CreateProject,
+  },
+  {
+    path: "/project/:id/edit",
+    name: "EditProject",
+    component: CreateProject,
   },
 ];
 

@@ -66,15 +66,4 @@ class CompanyController extends Controller
 
         return response()->json(['message' => 'Company deleted']);
     }
-
-
-    public function summary(Request $request)
-    {
-        $user = $request->user();
-
-        return response()->json([
-            'active_company_name' => optional($user->activeCompany)->name,
-            'total_companies' => $user->companies()->count(),
-        ]);
-    }
 }

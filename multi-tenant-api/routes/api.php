@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CompanyController;
+use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\API\UserController;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -12,7 +13,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [UserController::class, 'me']);
 
-    // Company APIs
+    // Company
     Route::get('/companies', [CompanyController::class, 'index']);
     Route::post('/companies', [CompanyController::class, 'store']);
     Route::get('/companies/{company}', [CompanyController::class, 'show']);
@@ -21,5 +22,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Set Active Company
     Route::post('/companies/{company}/set-active', [UserController::class, 'setActiveCompany']);
-    Route::get('/active-company-summary', [CompanyController::class, 'summary']);
+
+    // projects
+    Route::get('/projects-details', [ProjectController::class, 'index']);
+    Route::post('/projects', [ProjectController::class, 'store']);
+    Route::get('/edit-projects/{projects}', [ProjectController::class, 'show']);
+    Route::put('/projects/{project}', [ProjectController::class, 'update']);
+    Route::delete('/delete-projects/{project}', [ProjectController::class, 'destroy']);
 });
