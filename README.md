@@ -48,7 +48,7 @@ Follow these steps after cloning the repository to set up the project on a new s
 ```bash
 cd multi-tenant-api
 composer install
-cp .env.example .env
+cp .env.example .env (add database configuration)
 php artisan key:generate
 php artisan migrate
 php artisan serve
