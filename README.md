@@ -64,3 +64,4 @@ In this project :-
 - User can register and login
 - User can create multiple companies, edit, delete and switch comapny
 - When user switch any company then he can add project in active company
+- User can only perform any action in related projects, companies
