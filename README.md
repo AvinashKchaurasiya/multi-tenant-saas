@@ -61,6 +61,6 @@ npm run dev
 
 ## Project Description
 In this project :- 
-1 :- User can register and login
-2 :- User can create multiple companies, edit, delete and switch comapny
-3 :- When user switch any company then he can add project in active company
+- User can register and login
+- User can create multiple companies, edit, delete and switch comapny
+- When user switch any company then he can add project in active company
