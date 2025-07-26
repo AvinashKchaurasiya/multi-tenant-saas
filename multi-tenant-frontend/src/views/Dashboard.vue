@@ -26,7 +26,6 @@
                         <tr>
                             <th>#</th>
                             <th>Project Name</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,13 +35,6 @@
                         <tr v-for="(project, index) in projects" :key="project.id">
                             <td>{{ index + 1 + (pagination.current_page - 1) * pagination.per_page }}</td>
                             <td>{{ project.name }}</td>
-                            <td>
-                                <router-link :to="{ name: 'EditProject', params: { id: project.id } }"
-                                    class="btn btn-sm btn-primary me-1">
-                                    Edit
-                                </router-link>
-                                <button class="btn btn-sm btn-danger" @click="deleteProject(project.id)">Delete</button>
-                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -115,27 +107,6 @@ export default {
         formatDate(date) {
             return new Date(date).toLocaleDateString();
         },
-        editProject(projectId) {
-            alert(`Edit Project ID: ${projectId}`);
-            // You can redirect or open a modal here
-        },
-        async deleteProject(projectId) {
-            if (!confirm("Are you sure you want to delete this project?")) return;
-
-            try {
-                const token = localStorage.getItem('token');
-                await axios.delete(`http://127.0.0.1:8000/api/projects/${projectId}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                alert("Project deleted successfully!");
-                this.fetchSummary(this.pagination.current_page); // Refresh current page
-            } catch (error) {
-                console.error("Delete failed:", error);
-                alert("Failed to delete project.");
-            }
-        }
     }
 };
 </script>

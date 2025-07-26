@@ -89,7 +89,7 @@ export default {
                     await axios.post('http://127.0.0.1:8000/api/companies', this.form, { headers });
                 }
                 this.errors = {};
-                this.$router.push('/conpanies');
+                this.$router.push('/companies');
             } catch (error) {
                 if (error.response && error.response.status === 422) {
                     this.errors = error.response.data.errors;

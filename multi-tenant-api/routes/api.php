@@ -26,7 +26,4 @@ Route::middleware('auth:sanctum')->group(function () {
     // projects
     Route::get('/projects-details', [ProjectController::class, 'index']);
     Route::post('/projects', [ProjectController::class, 'store']);
-    Route::get('/edit-projects/{projects}', [ProjectController::class, 'show']);
-    Route::put('/projects/{project}', [ProjectController::class, 'update']);
-    Route::delete('/delete-projects/{project}', [ProjectController::class, 'destroy']);
 });
