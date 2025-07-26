@@ -12,8 +12,14 @@
             </div>
         </div>
 
+        <div class="container mt-3">
+            <div v-if="errorMessage" class="alert alert-danger text-center">
+                {{ errorMessage }}
+            </div>
+        </div>
+
         <!-- Projects Table -->
-        <div class="container mt-4">
+        <div class="container mt-4" v-if="showProjectsSection">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h2>📋 Projects List</h2>
                 <router-link to="/project/create" class="btn btn-success">
@@ -65,6 +71,8 @@ export default {
         return {
             activeCompanyName: '',
             totalCompanies: 0,
+            errorMessage: '',
+            showProjectsSection: true,
             projects: [],
             pagination: {
                 current_page: 1,
@@ -88,6 +96,14 @@ export default {
                     }
                 });
 
+                if (response.data.status === false) {
+                    this.showProjectsSection = false;
+                    this.errorMessage = response.data.message;
+                    return;
+                }
+
+                this.showProjectsSection = true;
+                this.errorMessage = '';
                 this.activeCompanyName = response.data.active_company_name;
                 this.totalCompanies = response.data.total_companies;
 

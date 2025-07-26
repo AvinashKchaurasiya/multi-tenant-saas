@@ -15,7 +15,12 @@ class ProjectController extends Controller
 
         // Get active company ID
         $activeCompanyId = $user->active_company_id;
-
+        if (!$activeCompanyId) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Please select an active company to proceed.',
+            ], 200);
+        }
         // Fetch projects of the active company
         $projects = [];
         if ($activeCompanyId) {
@@ -51,7 +56,8 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function show(Request $request, Project $project){
+    public function show(Request $request, Project $project)
+    {
         $user = $request->user();
 
         // Check if the project belongs to the active company
